@@ -4,7 +4,7 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 import "."
-
+import qs.Core
 
 Rectangle {
     id: networkIndicator
@@ -25,18 +25,12 @@ Rectangle {
         id: label
         anchors.centerIn: parent
         text: {
-            // font.family: JetBrainsMono Nerd Font
-            if (networkIndicator.connType === "wifi")
-                return "Wifi " + networkIndicator.signal + "%"
-            else if (networkIndicator.connType === "ethernet")
-                return "LAN"
-            else
-                return "!Offline"
-        }
+            networkIcon + " " + networkIndicator.signal + "%"
+         }
         color: networkIndicator.connected ? Theme.colFg : Theme.colRed
         font.bold: true
-        font.pixelSize: 12
-        font.family: Theme.fontFamily
+        font.pixelSize: 14
+        font.family: Theme.iconFontFamily
     }
 
     // finds the currently active device (wifi or ethernet)
@@ -76,5 +70,15 @@ Rectangle {
         repeat: true
         triggeredOnStart: true
         onTriggered: statusProc.running = true
+    }
+
+    property string networkIcon: {
+
+        if (networkIndicator.connType === "wifi")
+            return Icons.networkWifiConnected
+        if (networkIndicator.connType === "ethernet")
+            return Icons.networkEthernet
+        else
+            return Icons.networkWifiDisconnected
     }
 }

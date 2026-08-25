@@ -8,7 +8,7 @@ RowLayout {
     spacing: 6
 
     Repeater {
-        model: 5
+        model: 8
 
         Rectangle {
             id: wsIndicator
@@ -16,20 +16,14 @@ RowLayout {
             property var ws: Hyprland.workspaces.values.find(w => w.id === index + 1)
             property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
 
-            implicitWidth: 20
-            implicitHeight: 20
-            radius: 2
-            color: isActive ? Theme.colYellow : (ws ? Theme.colBgAlt: Theme.colBg)
-            border.width: 0
+            implicitWidth: isActive ? 18 : (ws ? 10 : 10)
+            implicitHeight: isActive ? 18 : (ws ? 10 : 10)
+            radius: isActive ? 4 : (ws ? 2 : 2)
+            color: isActive ? Theme.colYellow : (ws ? Theme.colBgAlt : Theme.colBg)
+            border.width: isActive ? 0 : (ws ? 0 : 1)
             border.color: Theme.colFg
             
-            Text {
-                anchors.centerIn: parent
-                text: wsIndicator.index + 1
-                color: wsIndicator.isActive ? Theme.colBg : (wsIndicator.ws ? Theme.colBg : Theme.colFg)
-                font { bold: true; pixelSize: 12; family: Theme.fontFamily}
-            }
-
+            
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true

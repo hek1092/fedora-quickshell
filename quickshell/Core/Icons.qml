@@ -15,4 +15,8 @@ QtObject {
     readonly property string battery20: "󰁻"
     readonly property string battery10: "󰁺"
     readonly property string battery0: "󰂎"
+
+    readonly property string networkEthernet: "󰈀"
+    readonly property string networkWifiConnected: "󰖩"
+    readonly property string networkWifiDisconnected: "󰖪"
 }

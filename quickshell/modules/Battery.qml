@@ -1,5 +1,6 @@
 // Battery.qml
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Services.UPower
 import QtQuick
 import QtQuick.Layouts
@@ -16,6 +17,9 @@ Rectangle {
     readonly property bool charging: battery.state === UPowerDeviceState.Charging
     readonly property bool critical: pct <= 15 && !charging
 
+    // readonly property string iconName: battery.iconName
+    // readonly property string coloredIconName: iconName.replace("-symbolic", "")
+    
     // hide entirely if there's no laptop battery on this device
     visible: battery.isLaptopBattery
 
@@ -23,36 +27,44 @@ Rectangle {
     implicitHeight: 22
     radius: 2
     color: Theme.colBg
-    border.width: 1
-    border.color: critical ? Theme.colRed : (charging ? Theme.colGreen : Theme.colBg)
-
     
-  Text {
-    text: {
-      if (!battery || !battery.available) return ""
-      if (battery.status === "charging") return ""
-      var pct = battery.percent
-      if (pct <= 10) return ""
-      if (pct <= 35) return ""
-      if (pct <= 65) return ""
-      if (pct <= 85) return ""
-      return ""
+    Text {
+        id: icon
+        text: " " + batteryIcon
+        font { pixelSize: 14; family: Theme.iconFontFamily }
+        color: Theme.colFg
     }
-    font { pixelSize: 14; family: "Liberation Mono"}
-    color: (!battery || !battery.available) ? "#6c7086"
-         : battery.percent <= 10 ? "#f38ba8"
-         : battery.percent <= 20 ? "#fab387"
-         : "#a6e3a1"
-  }
-
     
     Text {
         id: label
         anchors.centerIn: parent
-        text: batteryIndicator.pct + "%"
-        color: batteryIndicator.critical ? Theme.colRed : (batteryIndicator.charging ? Theme.colGreen : Theme.colFg)
+        text: " " + batteryIndicator.pct + "%"
+        color: Theme.colFg
         font.bold: true
-        font.pixelSize: 12
+        font.pixelSize: 14
         font.family: Theme.fontFamily
     } 
+
+   
+
+    property string batteryIcon: {
+        const p = batteryIndicator.pct
+
+        if (batteryIndicator.charging)
+            return Icons.batteryCharging
+
+        if (p >= 95) return Icons.battery100
+        if (p >= 85) return Icons.battery90
+        if (p >= 75) return Icons.battery80
+        if (p >= 65) return Icons.battery70
+        if (p >= 55) return Icons.battery60
+        if (p >= 45) return Icons.battery50
+        if (p >= 35) return Icons.battery40
+        if (p >= 25) return Icons.battery30
+        if (p >= 15) return Icons.battery20
+        if (p >= 5)  return Icons.battery10
+
+        return Icons.battery0
+    }
+        
 }

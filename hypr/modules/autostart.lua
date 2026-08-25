@@ -10,5 +10,6 @@
 hl.on("hyprland.start", function () 
    hl.exec_cmd("hyprpaper")
    hl.exec_cmd("quickshell")
--- hl.exec_cmd("")
+   hl.exec_cmd("hypridle && hyprlock")
+   hl.exec_cmd("dunst")
 end)

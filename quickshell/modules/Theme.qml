@@ -12,4 +12,5 @@ QtObject {
     readonly property color colBlue: "#7375e4"
     readonly property color colGreen: "#17e617"
     readonly property string fontFamily: "JetBrains Mono"
+    readonly property string iconFontFamily: "JetBrainsMono Nerd Font"
 }
