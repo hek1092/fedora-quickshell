@@ -1,0 +1,12 @@
+[SddmGreeterTheme]
+Name=fedora-quickshell
+Description=SDDM theme matching the fedora-quickshell rice (Hyprland + Quickshell)
+Author=hek1092
+Copyright=(c) 2026, hek1092
+License=MIT
+Type=sddm-theme
+Version=1.0
+Website=https://github.com/hek1092/fedora-quickshell
+MainScript=Main.qml
+ConfigFile=theme.conf
+Font=JetBrains Mono
